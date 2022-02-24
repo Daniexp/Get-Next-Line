@@ -1,0 +1,6 @@
+.*.swp
+42*
+*.out
+main.c
+gnlTester
+*.txt
