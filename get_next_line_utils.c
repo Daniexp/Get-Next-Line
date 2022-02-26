@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:29:27 by dexposit          #+#    #+#             */
-/*   Updated: 2022/02/25 22:31:38 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:17:54 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,35 +47,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (subs);
 }
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*ptr;
-	if (!s)
-		return (NULL);
-	ptr = 0;
-	while (*s)
-	{
-		if (*s == (unsigned char)c)
-			ptr = (char *)s;
+	while ((*s != (unsigned char)c) && *s)
 		s++;
-	}
-	if (c == 0)
-		ptr = (char *)s;
-	return (ptr);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*aux;
-
-	aux = s;
-	while (n > 0)
-	{
-		*aux = '\0';
-		n--;
-		aux++;
-	}
-	return ;
+	if (!*s && c != 0)
+		return (0);
+	return ((char *)s);
 }
 
 void	*ft_memcpy(void *dest, const void *src, size_t len)
