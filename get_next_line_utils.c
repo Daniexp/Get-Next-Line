@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:29:27 by dexposit          #+#    #+#             */
-/*   Updated: 2022/02/26 19:17:54 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/02/26 22:45:48 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,30 @@ void	*ft_memcpy(void *dest, const void *src, size_t len)
 		i++;
 	}
 	return (dest);
+}
+
+char	*cat(char *first, char *end)
+{
+	char	*res;
+	size_t	len;
+
+	if (!first)
+	{
+		free(first);
+		res = ft_substr(end, 0, ft_strlen(end));
+		if (!res)
+			return (0);
+	}
+	else
+	{
+		len = 1 + ft_strlen(first) + ft_strlen(end);
+		res = malloc(sizeof(char) * len);
+		if (!res)
+			return (0);
+		ft_memcpy(res, first, ft_strlen(first));
+		ft_memcpy(res + ft_strlen(first), end, ft_strlen(end));
+		res[len - 1] = '\0';
+		free(first);
+	}
+	return (res);
 }
