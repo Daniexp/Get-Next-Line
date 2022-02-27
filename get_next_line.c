@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:29:14 by dexposit          #+#    #+#             */
-/*   Updated: 2022/02/26 22:45:41 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/02/27 18:30:05 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,35 @@ char	*end_file(char **read_str, char **aux_str, char **result)
 	}
 	return (*result);
 }
-/*
-static void	check(char **rest_read, char **aux_str, char **result, char *ind)
+
+int	cut_lines(int mode, char **aux, char **res, int fd)
 {
-	*aux_str = 0;
-	*result = 0;
-	if (*rest_read)
+	int	cnt;
+
+	cnt = 0;
+	if (mode == 1)
 	{
-		*aux_str = ft_substr(*rest_read, 0, ft_strlen(*rest_read));
-		free(*rest_read);
-		*rest_read = NULL;
-		//cut(&(*aux_str), ind, &(*result), &(*rest_read));
-		if (ind)
-		{
-			*result = ft_substr(*aux_str, 0, ind - *aux_str + 1);
-			if (ft_strlen(*result) != ft_strlen(*aux_str))
-				*rest_read = ft_substr(ind + 1, 0, ft_strlen(ind + 1));
-			free(*aux_str);
-		}
+		*aux = 0;
+		*res = 0;
 	}
-}*/
+	if (mode == 2)
+	{
+		*res = ft_substr(*aux, 0, ft_strlen(*aux));
+		free(*aux);
+	}
+	if (mode == 3)
+	{
+		free(*aux);
+		*aux = NULL;
+	}
+	if (mode == 4)
+	{
+		*aux = malloc(BUFFER_SIZE * sizeof(char) + 1);
+		cnt = read(fd, *aux, BUFFER_SIZE);
+		(*aux)[cnt] = '\0';
+	}
+	return (cnt);
+}
 
 char	*get_next_line(int fd)
 {
@@ -64,30 +73,22 @@ char	*get_next_line(int fd)
 	char		*result;
 	int			cnt_bytes;
 
-	aux_str = 0;
-	result = 0;
+	cut_lines(1, &aux_str, &result, 0);
 	if (rest_read)
 	{
 		aux_str = ft_substr(rest_read, 0, ft_strlen(rest_read));
-		free(rest_read);
-		rest_read = NULL;
+		cut_lines(3, &rest_read, 0, 0);
 		cut(&aux_str, ft_strchr(aux_str, '\n'), &result, &rest_read);
 	}
-	//check(&rest_read, &aux_str, &result, ft_strchr(aux_str, '\n'));
 	while (!result)
 	{
-		read_str = malloc(BUFFER_SIZE * sizeof(char) + 1);
-		cnt_bytes = read(fd, read_str, BUFFER_SIZE);
-		read_str[cnt_bytes] = '\0';
+		cnt_bytes = cut_lines(4, &read_str, 0, fd);
 		if (cnt_bytes <= 0)
 			return (end_file(&read_str, &aux_str, &result));
 		aux_str = cat(aux_str, read_str);
 		if (!cut(&aux_str, ft_strchr(aux_str, '\n'), &result, &rest_read)
 			&& cnt_bytes < BUFFER_SIZE)
-		{
-			result = ft_substr(aux_str, 0, ft_strlen(aux_str));
-			free(aux_str);
-		}
+			cut_lines(2, &aux_str, &result, 0);
 		free(read_str);
 	}
 	return (result);
