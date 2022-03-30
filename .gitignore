@@ -1,4 +1,5 @@
 .*.swp
+*.o
 42*
 *.out
 main.c

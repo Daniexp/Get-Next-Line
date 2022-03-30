@@ -6,15 +6,15 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:27:09 by dexposit          #+#    #+#             */
-/*   Updated: 2022/03/29 01:12:43 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/03/30 18:43:40 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
-#  endif
+#  define BUFFER_SIZE 1
+# endif
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
