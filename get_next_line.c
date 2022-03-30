@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dexposit <dexposit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:29:14 by dexposit          #+#    #+#             */
-/*   Updated: 2022/02/27 18:30:05 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/03/30 23:08:42 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,32 @@ int	cut_lines(int mode, char **aux, char **res, int fd)
 		(*aux)[cnt] = '\0';
 	}
 	return (cnt);
+}
+
+char	*cat(char *first, char *end)
+{
+	char	*res;
+	size_t	len;
+
+	if (!first)
+	{
+		free(first);
+		res = ft_substr(end, 0, ft_strlen(end));
+		if (!res)
+			return (0);
+	}
+	else
+	{
+		len = 1 + ft_strlen(first) + ft_strlen(end);
+		res = malloc(sizeof(char) * len);
+		if (!res)
+			return (0);
+		ft_memcpy(res, first, ft_strlen(first));
+		ft_memcpy(res + ft_strlen(first), end, ft_strlen(end));
+		res[len - 1] = '\0';
+		free(first);
+	}
+	return (res);
 }
 
 char	*get_next_line(int fd)
