@@ -6,11 +6,11 @@
 /*   By: dexposit <dexposit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:29:14 by dexposit          #+#    #+#             */
-/*   Updated: 2022/03/30 23:08:42 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/04/26 21:27:54 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include <get_next_line.h>
 
 static int	cut(char **aux_str, char *ind_line, char **result, char **rest_read)
 {

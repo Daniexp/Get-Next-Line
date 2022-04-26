@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:27:09 by dexposit          #+#    #+#             */
-/*   Updated: 2022/03/30 23:07:46 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/04/26 21:27:24 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "../libft.h"
+# include <libft.h>
 
 char	*get_next_line(int fd);
 char	*cat(char *first, char *end);
